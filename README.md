@@ -1,4 +1,5 @@
 # Calculator
+一个简单四则运算计算器
 
 [![CI Status](http://img.shields.io/travis/1049056949@qq.com/Calculator.svg?style=flat)](https://travis-ci.org/1049056949@qq.com/Calculator)
 [![Version](https://img.shields.io/cocoapods/v/Calculator.svg?style=flat)](http://cocoapods.org/pods/Calculator)
@@ -27,3 +28,4 @@ pod 'Calculator'
 ## License
 
 Calculator is available under the MIT license. See the LICENSE file for more info.
+

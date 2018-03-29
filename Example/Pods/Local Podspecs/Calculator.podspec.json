@@ -3,16 +3,16 @@
   "version": "0.1.0",
   "summary": "A short description of Calculator.",
   "description": "TODO: Add long description of the pod here.",
-  "homepage": "https://github.com/1049056949@qq.com/Calculator",
+  "homepage": "https://github.com/zhonglaoban/Calculator",
   "license": {
     "type": "MIT",
     "file": "LICENSE"
   },
   "authors": {
-    "1049056949@qq.com": "1049056949@"
+    "zhonglaoban": "zhonglaoban"
   },
   "source": {
-    "git": "https://github.com/1049056949@qq.com/Calculator.git",
+    "git": "https://github.com/zhonglaoban/Calculator.git",
     "tag": "0.1.0"
   },
   "platforms": {

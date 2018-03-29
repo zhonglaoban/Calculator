@@ -7,12 +7,24 @@
 //
 
 import UIKit
+import Calculator
 
 class ViewController: UIViewController {
-
+    let inputVC: CalculatorController = CalculatorController()
+    
+    @IBOutlet weak var textField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        textField.inputView = inputVC.view
+        let calculator:Calculator = Calculator()
+        calculator.didFinishCalculateBlock = {countString in
+            self.textField.text = countString
+        }
+        inputVC.didSeletctItemBlock = {str in
+            self.textField.text = (self.textField.text ?? "") + str
+            calculator.calculate(str)
+        }
     }
 
     override func didReceiveMemoryWarning() {

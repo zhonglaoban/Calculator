@@ -8,32 +8,38 @@
 import UIKit
 
 public class CalculatorController: UIViewController {
-
+    
     let allItem = ["7","8","9","+",
                    "4","5","6","-",
                    "1","2","3","x",
                    ".","0","=","/"]
-    
+    public var tintColor:UIColor? = UIColor.blue
     public var didSeletctItemBlock:((_ item: String)->())?
     
     func loadData() {
         let containerW = view.bounds.size.width / 4
-        let btnW = containerW - 4
+        let btnW = containerW * 0.8
         for (index, name) in allItem.enumerated() {
-            let centerX = CGFloat(index % 4) * containerW + containerW * 0.5
-            let centerY = CGFloat(index / 4) * containerW + containerW * 0.5
-            let btn = UIButton(type: .system)
-            btn.tag = index
-            btn.titleLabel?.font = UIFont.systemFont(ofSize: 25)
-            btn.frame = CGRect(origin: .zero, size: CGSize(width: btnW, height: btnW))
-            btn.center = CGPoint(x: centerX, y: centerY)
-            btn.setTitle(name, for: .normal)
-            btn.setTitleColor(UIColor.red, for: .normal)
-            btn.layer.cornerRadius = btnW * 0.5
-            btn.layer.borderColor = UIColor.red.cgColor
-            btn.layer.borderWidth = 1
-            btn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
-            view.addSubview(btn)
+            autoreleasepool {
+                let centerX = CGFloat(index % 4) * containerW + containerW * 0.5
+                let centerY = CGFloat(index / 4) * containerW + containerW * 0.5
+                let btn = UIButton(type: .system)
+                btn.tag = index
+                btn.titleLabel?.font = UIFont.systemFont(ofSize: 25)
+                let btnFrame = CGRect(origin: .zero, size: CGSize(width: btnW, height: btnW))
+                btn.frame = btnFrame
+                btn.center = CGPoint(x: centerX, y: centerY)
+                btn.setTitle(name, for: .normal)
+                btn.setTitleColor(tintColor, for: .normal)
+                let backLayer = CAShapeLayer()
+                let path = UIBezierPath(ovalIn: btnFrame)
+                backLayer.path = path.cgPath
+                let color = tintColor?.withAlphaComponent(0.2)
+                backLayer.fillColor = color?.cgColor
+                btn.layer.insertSublayer(backLayer, at: 0)
+                btn.addTarget(self, action: #selector(btnClick), for: .touchUpInside)
+                view.addSubview(btn)
+            }
         }
     }
     @objc func btnClick(btn:UIButton) {
@@ -46,25 +52,19 @@ public class CalculatorController: UIViewController {
         
         view.backgroundColor = UIColor.white
         view.autoresizingMask = []
+        // 适配iphone
         let marginBottom:CGFloat = UIApplication.shared.statusBarFrame.size.height > 20 ? 20:0
         view.bounds.size = CGSize(width: view.bounds.size.width, height: view.bounds.size.width + marginBottom)
+        let shadowLayer = CAGradientLayer()
+        shadowLayer.colors = [UIColor.white.cgColor, UIColor(red: 169/255.0, green: 169/255.0, blue: 169/255.0, alpha: 1).cgColor]
+        shadowLayer.locations = [0, 1]
+        shadowLayer.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.size.width, height: 1))
+        view.layer.addSublayer(shadowLayer)
         loadData()
     }
-
+    
     override public func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

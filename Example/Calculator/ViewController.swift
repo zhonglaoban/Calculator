@@ -9,21 +9,22 @@
 import UIKit
 import Calculator
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
     let inputVC: CalculatorController = CalculatorController()
+    let calculator:Calculator = Calculator()
     
     @IBOutlet weak var textField: UITextField!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         textField.inputView = inputVC.view
-        let calculator:Calculator = Calculator()
+        textField.delegate = self
         calculator.didFinishCalculateBlock = {countString in
             self.textField.text = countString
         }
         inputVC.didSeletctItemBlock = {str in
             self.textField.text = (self.textField.text ?? "") + str
-            calculator.calculate(str)
+            self.calculator.calculate(str)
         }
     }
 
@@ -31,6 +32,13 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
+    // MARK: - UITextField deleget
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        calculator.reset()
+        return true
+    }
 }
 

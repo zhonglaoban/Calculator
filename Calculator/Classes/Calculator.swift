@@ -12,6 +12,7 @@ public class Calculator {
     let operators:[String] = ["x", "/", "+", "-"]
     // MARK: - 变量
     var calculateStr:String = ""
+    var result:Float = 0
     lazy var calculateArray: [String] = {
         return [String]()
     }()
@@ -22,6 +23,7 @@ public class Calculator {
         
     }
     public func reset() {
+        result = 0
         calculateStr = ""
         calculateArray.removeAll()
     }
@@ -64,10 +66,11 @@ public class Calculator {
         if(arr.count == 1) {
             print(arr[0])
             didFinishCalculateBlock?(arr[0])
+            calculateStr = arr[0]
+            calculateArray.removeAll()
         }
     }
     func calculateCount(_ op: String, _ left: Float, _ right: Float) -> Float {
-        var result:Float = 0
         switch op {
         case "+":
             result = left + right

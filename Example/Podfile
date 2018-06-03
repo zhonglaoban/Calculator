@@ -6,6 +6,5 @@ target 'Calculator_Example' do
   target 'Calculator_Tests' do
     inherit! :search_paths
 
-    
   end
 end

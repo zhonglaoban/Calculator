@@ -65,8 +65,12 @@ public class Calculator {
         
         if(arr.count == 1) {
             print(arr[0])
-            didFinishCalculateBlock?(arr[0])
-            calculateStr = arr[0]
+            var resultString = arr[0]
+            if resultString == "inf" {
+                resultString = "错误"
+            }
+            didFinishCalculateBlock?(resultString)
+            calculateStr = resultString
             calculateArray.removeAll()
         }
     }

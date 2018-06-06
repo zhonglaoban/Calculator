@@ -55,11 +55,8 @@ public class CalculatorController: UIViewController {
         // 适配iphone
         let marginBottom:CGFloat = UIApplication.shared.statusBarFrame.size.height > 20 ? 20:0
         view.bounds.size = CGSize(width: view.bounds.size.width, height: view.bounds.size.width + marginBottom)
-        let shadowLayer = CAGradientLayer()
-        shadowLayer.colors = [UIColor.white.cgColor, UIColor(red: 169/255.0, green: 169/255.0, blue: 169/255.0, alpha: 1).cgColor]
-        shadowLayer.locations = [0, 1]
-        shadowLayer.frame = CGRect(origin: .zero, size: CGSize(width: view.bounds.size.width, height: 1))
-        view.layer.addSublayer(shadowLayer)
+
+        view.backgroundColor = UIColor(red: 239/255.0, green: 239/255.0, blue: 239/255.0, alpha: 1)
         loadData()
     }
     
